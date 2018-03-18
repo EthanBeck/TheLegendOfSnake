@@ -2,6 +2,7 @@ package MainHandler;
 
 import java.applet.Applet;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -49,6 +50,8 @@ public class Screen extends Applet
 
 		label = new JLabel();
 
+		setBackground(new Color(0x999999));
+		
 		inputMap = label.getInputMap(JComponent.WHEN_FOCUSED);
 		actionMap = label.getActionMap();
 
@@ -101,6 +104,8 @@ public class Screen extends Applet
 		g2.fillOval((int)character.x-character.width/2,(int)character.y-character.height/2,character.width,character.height);
 		character.movement();
 
+		character.displayMap(g2);
+		
 		setRenderingHints(g2);
 		repaint();
 	}

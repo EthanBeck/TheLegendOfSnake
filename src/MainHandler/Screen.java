@@ -2,6 +2,7 @@ package MainHandler;
 
 import java.applet.Applet;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -24,6 +25,8 @@ public class Screen extends Applet
 	private Graphics doubleG;//double buffering
 	Image im;
 
+	
+	
 	public static final int WIDTH = 300;
 	public static final int HEIGHT = 200;
 	public static final int SCALE  = 3;
@@ -45,6 +48,7 @@ public class Screen extends Applet
 
 	public Screen()
 	{
+		setBackground(new Color(0x999999));
 		frame = new JFrame("Tank Game");
 
 		label = new JLabel();
@@ -60,7 +64,7 @@ public class Screen extends Applet
 		frame.getContentPane().add(this, BorderLayout.CENTER);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
-
+		
 		frame.add(this,BorderLayout.CENTER);
 
 		frame.pack();
@@ -100,7 +104,7 @@ public class Screen extends Applet
 
 		g2.fillOval((int)character.x-character.width/2,(int)character.y-character.height/2,character.width,character.height);
 		character.movement();
-
+		character.displayMap(g2);
 		setRenderingHints(g2);
 		repaint();
 	}

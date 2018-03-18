@@ -1,5 +1,8 @@
 package Character;
 
+import java.awt.Graphics;
+
+import GUI.MiniMap;
 import Grid.Grid;
 import KeyboardAction.Keys;
 import MainHandler.Screen;
@@ -16,6 +19,7 @@ public class Character {
 	
 	public double speed = 1.5;
 	
+	MiniMap map = new MiniMap();
 	
 	public Character(){
 		
@@ -61,5 +65,11 @@ public class Character {
 			else if(yOffset<Grid.height-(Screen.HEIGHT*Screen.SCALE/2))
 				yOffset+=speed;
 		}
+		
+		map.updatePointer(xOffset-(Screen.WIDTH*Screen.SCALE/2)+x,yOffset-(Screen.HEIGHT*Screen.SCALE/2)+y);
+	}
+
+	public void displayMap(Graphics g){
+		map.displayGui(g);
 	}
 }

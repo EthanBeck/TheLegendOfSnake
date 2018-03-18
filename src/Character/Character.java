@@ -64,8 +64,8 @@ public class Character {
 				y+=speed;
 			else if(yOffset<Grid.height-(Screen.HEIGHT*Screen.SCALE/2))
 				yOffset+=speed;
-			map.updatePointer(xOffset-(Screen.WIDTH*Screen.SCALE/2)+x,yOffset-(Screen.HEIGHT*Screen.SCALE/2)+y);
 		}
+		map.updatePointer(xOffset-(Screen.WIDTH*Screen.SCALE/2)+x,yOffset-(Screen.HEIGHT*Screen.SCALE/2)+y);
 	}
 	public void displayMap(Graphics g){
 		map.displayGui(g);

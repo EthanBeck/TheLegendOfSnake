@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 
 import Character.Character;
 import KeyboardAction.Keys;
+import KeyboardAction.Mouse;
 
 public class Screen extends Applet
 {
@@ -33,15 +34,14 @@ public class Screen extends Applet
 	Font font;
 	FontMetrics metrics;
 
-	double mouseX;
-	double mouseY;
-
 	public static InputMap inputMap;
 	public static ActionMap actionMap;
 	JLabel label;
 
 	Keys key;
 
+	Mouse mouse;
+	
 	Character character = new Character();
 
 	public Screen()
@@ -56,6 +56,7 @@ public class Screen extends Applet
 		actionMap = label.getActionMap();
 
 		key = new Keys();
+		mouse = new Mouse(this);
 
 		setMinimumSize(new Dimension(WIDTH*SCALE,HEIGHT*SCALE));
 		setMaximumSize(new Dimension(WIDTH*SCALE,HEIGHT*SCALE));
@@ -78,38 +79,20 @@ public class Screen extends Applet
 
 	public synchronized void paint(Graphics g)
 	{
-		double degrees = 0;
-			degrees = -(int)(Math.atan((double)(mouseY-character.y)/(mouseX-character.x))*58)+90;
-			if((mouseX-character.x)>=0)
-				degrees+=180;
 		
 		Graphics2D g2 = (Graphics2D)g;
-		try{
-			if(getMousePosition()!=null){
-				mouseX = getMousePosition().getX();
-				mouseY = getMousePosition().getY();
-			}
-		}
-		catch(Exception e){
-			mouseX = 0;
-			mouseY = 0;
-		}
-
-		g.drawLine((int)character.x, (int)character.y, (int)character.x+(int)(Math.sin(Math.toRadians((int)((degrees+11.125)/22.5)*22.5))*-100), (int)character.y+(int)(Math.cos(Math.toRadians((int)((degrees+11.125)/22.5)*22.5))*-100));
 		
-		System.out.println(character.yOffset);
-		//System.out.println((mouseX-key.x) + " "+ (mouseY-key.y));
-
-
-		g2.fillOval((int)character.x-character.width/2,(int)character.y-character.height/2,character.width,character.height);
 		character.movement();
 
+		character.displayCharacter(g2);
+		character.displayCannon(g2);
+		
 		character.displayMap(g2);
 		
 		setRenderingHints(g2);
 		repaint();
 	}
-
+	
 	public void setRenderingHints(Graphics2D g2)
 	{
 		font = new Font("Comic Sans MS", Font.BOLD, 20);

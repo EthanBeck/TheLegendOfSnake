@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import GUI.MiniMap;
 import Grid.Grid;
 import KeyboardAction.Keys;
+import KeyboardAction.Mouse;
 import MainHandler.Screen;
 
 public class Character {
@@ -18,6 +19,9 @@ public class Character {
 	public int height = 60;
 
 	public double speed = 4;
+	
+	public int angles = 3;
+	double degrees = 0;
 
 	MiniMap map = new MiniMap();
 
@@ -33,6 +37,7 @@ public class Character {
 
 	public void movement()
 	{
+		updateAngle();
 		if((Keys.movement>>0)%2==1){//left
 			if(xOffset>=Grid.width-(Screen.WIDTH*Screen.SCALE/2)&&x>Screen.WIDTH*Screen.SCALE/2)
 				x-=speed;
@@ -67,7 +72,27 @@ public class Character {
 		}
 		map.updatePointer(xOffset-(Screen.WIDTH*Screen.SCALE/2)+x,yOffset-(Screen.HEIGHT*Screen.SCALE/2)+y);
 	}
+	
+	public void updateAngle(){
+		degrees = -(Math.atan((double)(Mouse.mouseY-y)/(Mouse.mouseX-x))*58)+90;
+			if((Mouse.mouseX-x)>=0)
+				degrees+=180;
+	}
+	
+	
+	public void displayCharacter(Graphics g){
+
+		g.fillOval((int)x-width/2,(int)y-height/2,width,height);
+	}
+	
 	public void displayMap(Graphics g){
 		map.displayGui(g);
+	}
+	
+	public void displayCannon(Graphics g){
+		double angle = 360/angles;
+		double arc = angle/2;
+		//g.drawLine((int)x, (int)y, (int)x+(int)(Math.sin(Math.toRadians((int)((degrees+11.125)/22.5)*22.5))*-100), (int)y+(int)(Math.cos(Math.toRadians((int)((degrees+11.125)/22.5)*22.5))*-100));
+		g.drawLine((int)x, (int)y, (int)x+(int)(Math.sin(Math.toRadians((int)((degrees+arc)/angle)*angle))*-100), (int)y+(int)(Math.cos(Math.toRadians((int)((degrees+arc)/angle)*angle))*-100));
 	}
 }

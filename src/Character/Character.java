@@ -14,7 +14,7 @@ public class Character {
 	public double xOffset = 450;
 	public double yOffset = 450;
 
-	public int width = 60;
+	public int width = 70;
 	public int height = 60;
 
 	public double speed = 1.5;

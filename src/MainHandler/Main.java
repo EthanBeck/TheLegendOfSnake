@@ -4,7 +4,6 @@ import KeyboardAction.Keys;
 
 public class Main implements Runnable
 {
-    
 	int ticks;
 	int frames;
 	public static final int FRAMES_PER_SECOND =40;

@@ -6,7 +6,7 @@ import MainHandler.Screen;
 
 public class Keys {
 	//static boolean left,up,down,right;
-	public static final String keybind[] = new String[]{"A","S","D","W"};
+	public static final String keybind[] = KeyBinds.WASD.getArray();
 	public static byte movement = 0;
 	
 	public int x;

@@ -1,5 +1,7 @@
 package KeyboardAction;
 
+import java.awt.event.KeyEvent;
+
 import javax.swing.KeyStroke;
 
 import MainHandler.Screen;
@@ -35,7 +37,8 @@ public class Keys {
 		
 		for(int i = 0;i<strings.length;i++)	
 		{
-			Screen.inputMap.put(KeyStroke.getKeyStroke(strings[i]), strings[i] + " pressed");							
+			
+			Screen.inputMap.put( KeyStroke.getKeyStroke(strings[i]), strings[i] + " pressed");							
 			Screen.actionMap.put(strings[i] + " pressed", new Movements(strings[i],false,i));
 			
 			Screen.inputMap.put(KeyStroke.getKeyStroke(strings[i].charAt(0),0,true), strings[i] + " pressed");						

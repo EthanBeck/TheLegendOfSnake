@@ -20,7 +20,7 @@ public class Character {
 
 	public double speed = 4;
 	
-	public int angles = 3;
+	public int angles = 16;
 	double degrees = 0;
 
 	MiniMap map = new MiniMap();

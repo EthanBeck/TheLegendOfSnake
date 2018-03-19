@@ -9,11 +9,11 @@ import KeyboardAction.Mouse;
 import MainHandler.Screen;
 
 public class Character {
-	public double x = 0;
-	public double y = 0;
+	public static double x = 0;
+	public static double y = 0;
 
-	public double xOffset = 450;
-	public double yOffset = 450;
+	public static double xOffset = 450;
+	public static double yOffset = 450;
 
 	public int width = 60;
 	public int height = 60;
@@ -23,7 +23,7 @@ public class Character {
 	double degrees = 0;
 
 	MiniMap map = new MiniMap(Screen.WIDTH*Screen.SCALE-MiniMap.width-Grid.border,Screen.HEIGHT*Screen.SCALE-MiniMap.height-Grid.border);
-
+	//Bag bag = new Bag();
 	public Character(){
 
 	}
@@ -93,7 +93,6 @@ public class Character {
 		int angles = 720;
 		double angle = 360/(double)angles;
 		double arc = angle/2;
-		System.out.println((int)((degrees+arc)/angle)*angle);
 		g.drawLine((int)x, (int)y, (int)x+(int)(Math.sin(Math.toRadians((int)((degrees+arc)/angle)*angle))*-100), (int)y+(int)(Math.cos(Math.toRadians((int)((degrees+arc)/angle)*angle))*-100));
 	}
 }

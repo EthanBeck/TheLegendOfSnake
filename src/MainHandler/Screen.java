@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import Character.Character;
+import Grid.Grid;
 import KeyboardAction.Keys;
 import KeyboardAction.Mouse;
 
@@ -39,11 +40,10 @@ public class Screen extends Applet
 	JLabel label;
 
 	Keys key;
-
 	Mouse mouse;
-	
 	Character character = new Character();
-
+	Grid grid = new Grid(1000);
+	
 	public Screen()
 	{
 		frame = new JFrame("Tank Game");
@@ -84,10 +84,12 @@ public class Screen extends Applet
 		
 		character.movement();
 
-		character.displayCharacter(g2);
-		character.displayCannon(g2);
+		grid.displayItems(g2);
 		
 		character.displayMap(g2);
+		
+		character.displayCharacter(g2);
+		character.displayCannon(g2);
 		
 		setRenderingHints(g2);
 		repaint();

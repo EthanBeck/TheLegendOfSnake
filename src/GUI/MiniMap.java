@@ -3,6 +3,7 @@ package GUI;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import Food.Item;
 import Grid.Grid;
 
 public class MiniMap {
@@ -30,14 +31,23 @@ public class MiniMap {
 	
 	public void displayGui(Graphics g){
 		g.setColor(new Color(229, 241, 255,100));
-		g.fillRect(xOffset, yOffset, width, height);
+		g.fillRoundRect(xOffset, yOffset, width, height,10,10);
+		for(Item item:Grid.items){
+			drawItem(g,item);
+		}
 		g.setColor(Color.RED);
 		g.fillOval(pointerX-dotRadius+xOffset, pointerY-dotRadius+yOffset,dotRadius*2,dotRadius*2);
+		g.setColor(Color.black);
 	}
 	
 	public void updatePointer(double x, double y) {
 		pointerX = (int)(x/xMax*width);
 		pointerY = (int)(y/yMax*height);
-		
+	}
+	public void drawItem(Graphics g,Item item){
+		g.setColor(Color.BLACK);
+		int xx = (int)((double)(item.x-item.food.getImage().getWidth()/4)/xMax*width);
+		int yy = (int)((double)(item.y-item.food.getImage().getHeight()/10)/yMax*height);
+		g.fillOval(xx+xOffset-1, yy+yOffset-1,2,2);
 	}
 }

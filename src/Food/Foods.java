@@ -19,8 +19,9 @@ public enum Foods {
 		
 		try {
 			image = ImageIO.read(new File("Images/"+name+".png"));
+			System.out.println("Found "+name);
 		} catch (IOException e) {
-			image = new BufferedImage(null, null, false, null);
+			System.out.println("Could not find "+name);
 		}
 	}
 

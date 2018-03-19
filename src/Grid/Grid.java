@@ -126,25 +126,26 @@ public class Grid {
 		int low = 0;
 		int high = list.size()-1;
 		ArrayList<Item> items = new ArrayList<>();
-		
-		num = 100;
 
-		while(mid!=low){
-			if(list.get(mid).x-num==Character.x){
-				items.add(mid+1, list.get(mid));
-				break;
+		num = Screen.SCALE*Screen.WIDTH/2+50;
+			while(mid!=low){
+				if(list.get(mid).x+num==Character.xOffset+Screen.SCALE*Screen.WIDTH/2){
+					items.add(list.get(mid));
+					low = mid;
+				}
+				if(Character.xOffset+Screen.SCALE*Screen.WIDTH/2<list.get(mid).x+num){
+					high = mid;
+					mid = (mid+low)/2;
+				}
+				else if(Character.xOffset+Screen.SCALE*Screen.WIDTH/2>list.get(mid).x+num){
+					low = mid;
+					mid = (high+mid)/2;
+				}
 			}
-			if(Character.x<list.get(mid).x-num){
-				high = mid;
-				mid = (mid+low)/2;
-			}
-			else if(Character.x>list.get(mid).x-num){
-				low = mid;
-				mid = (high+mid)/2;
-			}
-		}
-		while(list.get(mid).x<Character.x+num)
-			items.add(list.get(mid++));
+			while(list.get(mid).x-num<Character.xOffset+Screen.SCALE*Screen.WIDTH/2&&mid<list.size()-1&&mid>0)
+				items.add(list.get(mid++));
+		
+		System.out.println(Character.xOffset+Screen.SCALE*Screen.WIDTH/2);
 		return items;
 	}
 }

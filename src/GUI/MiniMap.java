@@ -6,8 +6,8 @@ import java.awt.Graphics;
 import Grid.Grid;
 
 public class MiniMap {
-	final int width = 100;
-	final int height = 75;
+	public static final int width = 100;
+	public static final int height = 75;
 	final int xOffset;
 	final int yOffset;
 	

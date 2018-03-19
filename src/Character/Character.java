@@ -20,10 +20,9 @@ public class Character {
 
 	public double speed = 4;
 	
-	public int angles = 16;
 	double degrees = 0;
 
-	MiniMap map = new MiniMap();
+	MiniMap map = new MiniMap(Screen.WIDTH*Screen.SCALE-MiniMap.width-Grid.border,Screen.HEIGHT*Screen.SCALE-MiniMap.height-Grid.border);
 
 	public Character(){
 
@@ -90,9 +89,11 @@ public class Character {
 	}
 	
 	public void displayCannon(Graphics g){
-		double angle = 360/angles;
+
+		int angles = 720;
+		double angle = 360/(double)angles;
 		double arc = angle/2;
-		//g.drawLine((int)x, (int)y, (int)x+(int)(Math.sin(Math.toRadians((int)((degrees+11.125)/22.5)*22.5))*-100), (int)y+(int)(Math.cos(Math.toRadians((int)((degrees+11.125)/22.5)*22.5))*-100));
+		System.out.println((int)((degrees+arc)/angle)*angle);
 		g.drawLine((int)x, (int)y, (int)x+(int)(Math.sin(Math.toRadians((int)((degrees+arc)/angle)*angle))*-100), (int)y+(int)(Math.cos(Math.toRadians((int)((degrees+arc)/angle)*angle))*-100));
 	}
 }

@@ -26,8 +26,8 @@ public class Movements extends AbstractAction //Transfers raw keyboard input int
 	public void actionPerformed(ActionEvent e) 
 	{
 		if(!released)
-			Keys.movement = (byte)(Keys.movement|(int)(Math.pow(2, index)));
+			Keys.movement |= (int)Math.pow(2, index);
 		else
-			Keys.movement = (byte)(Keys.movement^(int)(Math.pow(2, index)));
+			Keys.movement ^= (int)Math.pow(2, index);
 	}
 }

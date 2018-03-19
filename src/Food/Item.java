@@ -14,7 +14,7 @@ public class Item {
 	
 	boolean inBag;
 	
-	int scale = 20;
+	int scale = 19;
 	
 	
 	

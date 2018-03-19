@@ -47,7 +47,7 @@ public class Grid {
 			else
 				i--;
 		}
-		items = sortItems(items);
+		items = sortItemsX(items);
 		for(Item item:items)
 			System.out.println(item.x);
 	}
@@ -55,6 +55,8 @@ public class Grid {
 	public void displayItems(Graphics2D g){
 		int count = 0;
 		ArrayList<Item> temp = binarySearch(items, 50);
+		//ArrayList<Item> temp = items;
+		//temp = binarySearchY(temp, 50);
 		for(Item item:temp){
 			if(item.x+item.food.getImage().getWidth()/scale>=Character.xOffset&&item.y+item.food.getImage().getHeight()/scale>=Character.yOffset)
 				if(item.x-item.food.getImage().getWidth()/scale<=Character.xOffset+Screen.WIDTH*Screen.SCALE&&item.y-item.food.getImage().getHeight()/scale<=Character.yOffset+Screen.HEIGHT*Screen.SCALE){
@@ -64,7 +66,7 @@ public class Grid {
 		}
 	}
 
-	public ArrayList<Item> sortItems(ArrayList<Item> items){
+	public ArrayList<Item> sortItemsX(ArrayList<Item> items){
 		radixSortX(items);
 		return items;
 
@@ -121,31 +123,99 @@ public class Grid {
 		System.gc();
 		return max>x?negativeRadixX(list,max,++x):list;
 	}
+	
+	public static ArrayList<Item> binarySearchX(ArrayList<Item> list,int num){
+		int mid = list.size()/2;
+		int low = 0;
+		int high = list.size()-1;
+		ArrayList<Item> items = new ArrayList<>();
+
+		int count = 0;
+
+		num = Screen.SCALE*Screen.WIDTH/2+50;
+		while(mid!=low){
+			count++;
+			if(list.get(mid).x==Character.xOffset){
+				items.add(list.get(mid));
+				low = mid;
+			}
+			if(Character.xOffset<list.get(mid).x){
+				high = mid;
+				mid = (mid+low)/2;
+			}
+			else if(Character.xOffset>list.get(mid).x){
+				low = mid;
+				mid = (high+mid)/2;
+			}
+		}
+		int midTemp = mid;
+		while(list.get(mid).x>Character.xOffset-num&&mid>0){
+			items.add(list.get(mid--));
+			//count++;
+		}
+		mid = midTemp+1;
+		while(list.get(mid).x<Character.xOffset+Screen.SCALE*Screen.WIDTH/2+num&&mid<list.size()-1){
+			items.add(list.get(mid++));
+			//count++;
+		}
+
+		System.out.println(count);
+		return items;
+	}
 	public static ArrayList<Item> binarySearch(ArrayList<Item> list,int num){
 		int mid = list.size()/2;
 		int low = 0;
 		int high = list.size()-1;
 		ArrayList<Item> items = new ArrayList<>();
 
+		int count = 0;
+
 		num = Screen.SCALE*Screen.WIDTH/2+50;
-			while(mid!=low){
-				if(list.get(mid).x+num==Character.xOffset+Screen.SCALE*Screen.WIDTH/2){
-					items.add(list.get(mid));
-					low = mid;
-				}
-				if(Character.xOffset+Screen.SCALE*Screen.WIDTH/2<list.get(mid).x+num){
-					high = mid;
-					mid = (mid+low)/2;
-				}
-				else if(Character.xOffset+Screen.SCALE*Screen.WIDTH/2>list.get(mid).x+num){
-					low = mid;
-					mid = (high+mid)/2;
-				}
-			}
-			while(list.get(mid).x-num<Character.xOffset+Screen.SCALE*Screen.WIDTH/2&&mid<list.size()-1&&mid>0)
-				items.add(list.get(mid++));
 		
-		System.out.println(Character.xOffset+Screen.SCALE*Screen.WIDTH/2);
+		int index1=0,index2=0;
+		
+		int flex = 5;
+		while(mid!=low){
+			count++;
+			if(list.get(mid).x==Character.xOffset-Screen.SCALE*Screen.WIDTH){
+				items.add(list.get(mid));
+				index2 = mid;
+				low = mid;
+			}
+			if(Character.xOffset-Screen.SCALE*Screen.WIDTH<list.get(mid).x){
+				high = mid;
+				mid = (mid+low)/2;
+			}
+			else if(Character.xOffset-Screen.SCALE*Screen.WIDTH>list.get(mid).x){
+				low = mid;
+				mid = (high+mid)/2;
+			}
+		}
+		 mid = list.size()/2;
+		 low = 0;
+		 high = list.size()-1;
+		while(mid!=low){
+			count++;
+			if(list.get(mid).x==Character.xOffset+Screen.SCALE*Screen.WIDTH){
+				items.add(list.get(mid));
+				index1 = mid;
+				low = mid;
+			}
+			if(Character.xOffset+Screen.SCALE*Screen.WIDTH<list.get(mid).x){
+				high = mid;
+				mid = (mid+low)/2;
+			}
+			else if(Character.xOffset+Screen.SCALE*Screen.WIDTH>list.get(mid).x){
+				low = mid;
+				mid = (high+mid)/2;
+			}
+		}
+		if(index1<index2)
+			items.addAll(list.subList(index1, index2));
+		else
+
+			items.addAll(list.subList(index2, index1));
+		System.out.println(count);
 		return items;
 	}
 }

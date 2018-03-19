@@ -42,7 +42,7 @@ public class Screen extends Applet
 	Keys key;
 	Mouse mouse;
 	Character character = new Character();
-	Grid grid = new Grid(100);
+	Grid grid = new Grid(1000);
 	
 	public Screen()
 	{

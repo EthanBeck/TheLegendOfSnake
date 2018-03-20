@@ -48,8 +48,6 @@ public class Grid {
 				i--;
 		}
 		items = sortItemsX(items);
-		for(Item item:items)
-			System.out.println(item.x);
 	}
 
 	public void displayItems(Graphics2D g){
@@ -159,7 +157,6 @@ public class Grid {
 			//count++;
 		}
 
-		System.out.println(count);
 		return items;
 	}
 	public static ArrayList<Item> binarySearch(ArrayList<Item> list,int num){
@@ -174,12 +171,11 @@ public class Grid {
 		
 		int index1=0,index2=0;
 		
-		int flex = 5;
 		while(mid!=low){
 			count++;
+			index2 = mid;
 			if(list.get(mid).x==Character.xOffset-Screen.SCALE*Screen.WIDTH){
 				items.add(list.get(mid));
-				index2 = mid;
 				low = mid;
 			}
 			if(Character.xOffset-Screen.SCALE*Screen.WIDTH<list.get(mid).x){
@@ -196,9 +192,9 @@ public class Grid {
 		 high = list.size()-1;
 		while(mid!=low){
 			count++;
+			index1 = mid;
 			if(list.get(mid).x==Character.xOffset+Screen.SCALE*Screen.WIDTH){
 				items.add(list.get(mid));
-				index1 = mid;
 				low = mid;
 			}
 			if(Character.xOffset+Screen.SCALE*Screen.WIDTH<list.get(mid).x){
@@ -215,7 +211,6 @@ public class Grid {
 		else
 
 			items.addAll(list.subList(index2, index1));
-		System.out.println(count);
 		return items;
 	}
 }

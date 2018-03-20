@@ -8,8 +8,10 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
+import java.awt.GraphicsConfiguration;
 import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import java.awt.image.WritableRaster;
 
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
@@ -24,8 +26,8 @@ import KeyboardAction.Mouse;
 
 public class Screen extends Applet
 {
-	private Graphics doubleG;//double buffering
-	Image im;
+	private Graphics2D doubleG;//double buffering
+	BufferedImage im;
 
 	public static final int WIDTH = 300;
 	public static final int HEIGHT = 200;
@@ -39,13 +41,18 @@ public class Screen extends Applet
 	public static ActionMap actionMap;
 	JLabel label;
 
+
+	WritableRaster raster;
+	
 	Keys key;
 	Mouse mouse;
 	Character character = new Character();
 	Grid grid = new Grid(1000);
 	
+	
 	public Screen()
 	{
+		
 		frame = new JFrame("Tank Game");
 
 		label = new JLabel();
@@ -91,7 +98,7 @@ public class Screen extends Applet
 		character.displayCharacter(g2);
 		character.displayCannon(g2);
 		
-		setRenderingHints(g2);
+
 		repaint();
 	}
 	
@@ -114,13 +121,15 @@ public class Screen extends Applet
 	{
 		if(im == null)
 		{
-			im = createImage(this.getSize().width,this.getSize().height);
-			doubleG = im.getGraphics();
+			im = (BufferedImage) createImage(this.getSize().width,this.getSize().height);
+			doubleG = im.createGraphics();
+			setRenderingHints((Graphics2D)doubleG);
 		}
 		doubleG.setColor(getBackground());
 		doubleG.fillRect(0,0,this.getSize().width,this.getSize().height);
 		doubleG.setColor(getForeground());
 		paint(doubleG);
+
 		g.drawImage(im,0,0,this);
 	}
 }

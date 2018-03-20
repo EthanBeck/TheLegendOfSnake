@@ -48,6 +48,6 @@ public class MiniMap {
 		g.setColor(Color.BLACK);
 		int xx = (int)((double)(item.x-item.food.getImage().getWidth()/4)/xMax*width);
 		int yy = (int)((double)(item.y-item.food.getImage().getHeight()/10)/yMax*height);
-		g.fillOval(xx+xOffset-1, yy+yOffset-1,2,2);
+		//g.fillOval(xx+xOffset-1, yy+yOffset-1,1,1);
 	}
 }
